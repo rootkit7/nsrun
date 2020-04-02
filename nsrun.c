@@ -24,19 +24,23 @@ int main(int argc, char *argv[])
     }
 
     if (setuid(0) == -1)            /* Become root */
-        errExit("setuid");          /* you can set it at run time also */
+        errExit("setuid");
     fd = open(argv[1], O_RDONLY);   /* Get file descriptor for namespace */
     if (fd == -1)
         errExit("open");
 
     if (unshare(CLONE_NEWNET) == -1)    /* Leave parents namespace */
-            errExit("unshare");
+        errExit("unshare");
 
     if (setns(fd, CLONE_NEWNET) == -1)  /* Join new namespace */
-               errExit("setns");
+       errExit("setns");
 
     if (getuid() == 0) {
-        /* process is running as root, drop privileges */
+        /* process is running as root, drop privileges
+          It does not change secondary groups! We assume it was executed as a setuid
+          binary so we fall back to the callers uid.
+          We check for the gid as a security measure.
+         */
         if (setgid(groupid) != 0)
             errExit("setgid");
         if (setuid(userid) != 0)
