@@ -12,6 +12,8 @@ Make sure to understand the implications.
 For most cases tools like firejail, nsenter and others may
 be more capable.
 
+For more information look into the [wiki](https://github.com/toke/nsrun/wiki)
+
 ## Why?
 
 The main purpose of this tool is currently to run programs
