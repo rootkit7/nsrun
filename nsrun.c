@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
         errExit("unshare");
 
     if (setns(fd, CLONE_NEWNET) == -1)  /* Join new namespace */
-       errExit("setns");
+        errExit("setns");
 
     if (getuid() == 0) {
         /* process is running as root, drop privileges
