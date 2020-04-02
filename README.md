@@ -4,7 +4,7 @@ Execute program in an existing network namespace.
 
 **Warning:** This program needs elevated permissions to
 do it's job. It also allows to join network namespaces
-of other processes running as root and **also escape them
+of other processes running as root and **maybe escape them
 again**! It's not a tool to make your processes "secure"!
 
 Make sure to understand the implications.
